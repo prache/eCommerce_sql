@@ -54,7 +54,7 @@ select sc.customer_id, customer_name, sum(total_price) as total_purchase,
 avg(total_price) as average_purchase 
 from sales_customer sc 
 group by customer_id, customer_name
-order by total_purchase desc;
+order by average_purchase desc;
 
 -- Identify the top 10 customers based on their total spending.
 select customer_id, customer_name, sum(total_price) as total_spending

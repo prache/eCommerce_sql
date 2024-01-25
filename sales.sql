@@ -21,7 +21,8 @@ SELECT
     (random() * 1000)::NUMERIC(10, 2) AS total_price
 FROM generate_series(1, 1000)
 JOIN (SELECT customer_id FROM customer ORDER BY random()) AS c
-    ON true;
+    ON true
+   limit 1000;
 
 SELECT * FROM sales;
 

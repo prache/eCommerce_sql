@@ -11,7 +11,7 @@ INSERT INTO customer (customer_name, contact, membership)
 SELECT
     CONCAT(names.first_name, ' ', names.last_name) AS customer_name,
     CONCAT(names.first_name, '.', names.last_name, '@gmx.de') AS contact,
-    CASE WHEN RANDOM() < 0.5 THEN 'premium' ELSE 'standard' END AS membership
+    memberships.membership
 FROM (
     SELECT DISTINCT ON (first_name, last_name)
         first_name,
@@ -25,8 +25,13 @@ FROM (
         SELECT 'Sophia' UNION ALL
         SELECT 'William' UNION ALL
         SELECT 'Olivia' UNION ALL
-        SELECT 'James' UNION ALL
-        SELECT 'Emma'
+        SELECT 'James' UNION all
+        select 'Maren' UNION all
+        select 'Louisa' UNION all
+        select 'Karin' UNION all
+        select 'Cindy' UNION all
+        select 'Christian' UNION all
+        SELECT 'Maurice'
         -- Add more first names here if needed
     ) AS first_names
     CROSS JOIN (
@@ -38,11 +43,20 @@ FROM (
         SELECT 'Miller' UNION ALL
         SELECT 'Davis' UNION ALL
         SELECT 'Garcia' UNION ALL
-        SELECT 'Rodriguez' UNION ALL
+        SELECT 'Höffner' UNION all
+        SELECT 'Bakmann' UNION all
+        SELECT 'Schmitz' UNION all
+        SELECT 'Müller' UNION all
+        SELECT 'Schneider' UNION all
+        SELECT 'Weiland' UNION all
         SELECT 'Martinez'
         -- Add more last names here if needed
     ) AS last_names
 ) AS names
+CROSS JOIN (
+    SELECT 'Standard' AS membership UNION ALL
+    SELECT 'Premium'
+) AS memberships
 ORDER BY RANDOM()
 LIMIT 100;
 
