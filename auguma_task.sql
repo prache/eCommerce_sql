@@ -18,7 +18,7 @@ CREATE TABLE product (
     price DECIMAL(10, 2)
 );
 
-CREATE SEQUENCE customer_id_seq;
+--CREATE SEQUENCE customer_id_seq;
 
 CREATE TABLE customer (
     customer_id INT PRIMARY KEY DEFAULT nextval('customer_id_seq'),
@@ -148,7 +148,7 @@ FROM (
         SELECT 'Davis' UNION ALL
         SELECT 'Garcia' UNION ALL
         SELECT 'Höffner' UNION all
-        SELECT 'Bakmann' UNION all
+        SELECT 'Bankmann' UNION all
         SELECT 'Schmitz' UNION all
         SELECT 'Müller' UNION all
         SELECT 'Schneider' UNION all
@@ -189,7 +189,8 @@ SELECT s.store_id, st.location_store, SUM(s.total_price) AS total_sales
 FROM sales s
 JOIN stores st ON s.store_id = st.store_id
 WHERE EXTRACT(MONTH FROM s.date) = 12
-GROUP BY s.store_id, st.location_store;
+GROUP BY s.store_id, st.location_store
+ORDER BY total_sales DESC;
 
 /*2. Identify the top 5 performing products in terms of quantity sold.*/
 SELECT p.product_name, p.category, s.product_id, SUM(s.quantity) AS total_quantity
@@ -200,14 +201,78 @@ ORDER BY total_quantity DESC
 LIMIT 5;
 
 /*3. Analyze the sales trend for a particular product category over the past year.*/
-select s.
-* Customer Insights:
-4. Determine the average purchase value per customer.
-5. Identify the top 10 customers based on their total spending.
-6. Find patterns (look at avg. spendings) in purchase behavior based on membership
-status.
-* Advanced Analysis:
+select p.category, sum(quantity)  as total_quantity
+from sales s 
+join product p on p.product_id = s.product_id
+group by category 
+order by total_quantity desc;
+
+/* Customer Insights:
+4. Determine the average purchase value per customer.*/
+select s.customer_id, c.customer_name, sum(total_price) as total_purchase, 
+avg(s.total_price) as average_purchase 
+from sales s 
+join customer c  on c.customer_id = s.customer_id
+group by s.customer_id, c.customer_name
+order by average_purchase desc;
+
+/*5. Identify the top 10 customers based on their total spending.*/
+select s.customer_id, c.customer_name, sum(total_price) as total_spending
+from sales s 
+join customer c  on c.customer_id = s.customer_id
+group by s.customer_id, c.customer_name
+order by total_spending desc
+limit 10;
+
+/*6. Find patterns (look at avg. spendings) in purchase behavior based on membership
+status.*/
+select s.customer_id, c.customer_name, c.membership, avg(s.total_price) as average_spending 
+from sales s 
+join customer c  on c.customer_id = s.customer_id
+group by s.customer_id, c.customer_name, membership 
+order by average_spending desc;
+
+/* Advanced Analysis:
 7. Use window functions to rank stores based on their growth in sales quarter over
 quarter.*/
+SELECT store_id, location_store, quarter, avg_sales_growth, store_rank
+FROM (
+  SELECT store_id, location_store, quarter, avg_sales_growth,
+         RANK() OVER (PARTITION BY quarter ORDER BY avg_sales_growth DESC) AS store_rank
+  FROM (
+    SELECT s.store_id, st.location_store, 
+           DATE_TRUNC('quarter', s.date) AS quarter,
+           AVG(s.total_price) - LAG(AVG(s.total_price)) OVER (PARTITION BY s.store_id ORDER BY DATE_TRUNC('quarter', s.date)) AS avg_sales_growth
+    FROM sales s
+    JOIN stores st ON s.store_id = st.store_id
+    GROUP BY s.store_id, st.location_store, DATE_TRUNC('quarter', s.date)
+  ) AS subquery
+) AS ranked_stores;
+
+
+WITH ranked_stores AS (
+  SELECT s.store_id, st.location_store, quarter, sum_sales, store_rank
+  FROM (
+    SELECT s.store_id, st.location_store, quarter, sum_sales,
+           RANK() OVER (PARTITION BY quarter ORDER BY sum_sales DESC) AS store_rank
+    FROM (
+      SELECT s.store_id, st.location_store, 
+             DATE_TRUNC('quarter', s.date) AS quarter,
+             SUM(s.total_price) AS sum_sales
+      FROM sales s
+      JOIN stores st ON s.store_id = st.store_id
+      GROUP BY s.store_id, st.location_store, DATE_TRUNC('quarter', s.date)
+    ) AS subquery
+  ) AS ranked_stores
+)
+SELECT *
+FROM ranked_stores
+WHERE store_rank > 10;
+
+
+
+
+
+
 
 
