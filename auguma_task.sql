@@ -1,27 +1,16 @@
 /*POINT ONE: Write an SQL Script to create the example tables, incl. inserting the example dataset.*/
 --- schema definition
-CREATE TABLE sales (
-    transaction_id SERIAL PRIMARY KEY,
-    date DATE NOT NULL,
-    customer_id INTEGER NOT null,
-    store_id INTEGER NOT NULL,
-    product_id INTEGER NOT NULL,
-    quantity INTEGER NOT NULL,
-    total_price DECIMAL(10, 2) NOT null
-);
 
 CREATE TABLE product (
-    product_id INTEGER NOT NULL,
+    product_id INTEGER primary key NOT null,
     category VARCHAR(100),
     product_name VARCHAR(100),
     supplier VARCHAR(100),
     price DECIMAL(10, 2)
 );
 
---CREATE SEQUENCE customer_id_seq;
-
 CREATE TABLE customer (
-    customer_id INT PRIMARY KEY DEFAULT nextval('customer_id_seq'),
+    customer_id SERIAL primary key not null, --INT PRIMARY KEY DEFAULT nextval('customer_id_seq'),
     customer_name VARCHAR(255),
     contact VARCHAR(255),
     membership VARCHAR(255)
@@ -34,19 +23,20 @@ create TABLE stores (
 	employee_number integer not null
 );
 
+CREATE TABLE sales (
+    transaction_id SERIAL PRIMARY KEY,
+    date DATE NOT NULL,
+    customer_id INTEGER NOT null,
+    store_id INTEGER NOT NULL,
+    product_id INTEGER NOT NULL,
+    quantity INTEGER NOT NULL,
+    total_price DECIMAL(10, 2) NOT null,
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+    FOREIGN KEY (store_id) REFERENCES stores(store_id),
+    FOREIGN KEY (product_id) REFERENCES product(product_id)
+);
+
 ---data insertion
-INSERT INTO sales (date, customer_id, store_id, product_id, quantity, total_price)
-SELECT
-    current_date - (random() * 365)::INTEGER AS date,
-    c.customer_id,
-    (random() * 9 + 1)::INTEGER AS store_id,
-    (random() * 59 + 1)::INTEGER AS product_id,
-    (random() * 9 + 1)::INTEGER AS quantity,
-    (random() * 1000)::NUMERIC(10, 2) AS total_price
-FROM generate_series(1, 1000)
-JOIN (SELECT customer_id FROM customer ORDER BY random()) AS c
-    ON true
-   limit 1000;
 
 INSERT INTO product (product_id, category, product_name, supplier, price) values
 ('1', 'Furnitures', 'Supreme Comfort Sofa', 'Supplier 15', 799),
@@ -110,7 +100,6 @@ INSERT INTO product (product_id, category, product_name, supplier, price) values
 ('59', 'Beds and Mattresses', 'High-End Home Gym Equipment', 'Supplier 7', 1999),
 ('60', 'Beds and Mattresses', 'Professional Tennis Racket', 'Supplier 15', 149);
 
-
 INSERT INTO customer (customer_name, contact, membership)
 SELECT
     CONCAT(names.first_name, ' ', names.last_name) AS customer_name,
@@ -135,6 +124,91 @@ FROM (
         select 'Karin' UNION all
         select 'Cindy' UNION all
         select 'Christian' UNION all
+        select 'Christian' UNION ALL
+		select 'Olivia' UNION ALL
+		select 'Liam' UNION ALL
+		select 'Emma' UNION ALL
+		select 'Noah' UNION ALL
+		select 'Ava' UNION ALL
+		select 'Sophia' UNION ALL
+		select 'Isabella' UNION ALL
+		select 'Mia' UNION ALL
+		select 'Charlotte' UNION ALL
+		select 'Amelia' UNION ALL
+		select 'Harper' UNION ALL
+		select 'Evelyn' UNION ALL
+		select 'Abigail' UNION ALL
+		select 'Emily' UNION ALL
+		select 'Elizabeth' UNION ALL
+		select 'Mila' UNION ALL
+		select 'Ella' UNION ALL
+		select 'Scarlett' UNION ALL
+		select 'Luna' UNION ALL
+		select 'Sofia' UNION ALL
+		select 'Avery' UNION ALL
+		select 'Grace' UNION ALL
+		select 'Chloe' UNION ALL
+		select 'Victoria' UNION ALL
+		select 'Madison' UNION ALL
+		select 'Eleanor' UNION ALL
+		select 'Hannah' UNION ALL
+		select 'Nora' UNION ALL
+		select 'Riley' UNION ALL
+		select 'Zoe' UNION ALL
+		select 'Lily' UNION ALL
+		select 'Layla' UNION ALL
+		select 'Lillian' UNION ALL
+		select 'Addison' UNION ALL
+		select 'Aubrey' UNION ALL
+		select 'Ellie' UNION ALL
+		select 'Stella' UNION ALL
+		select 'Natalie' UNION ALL
+		select 'Zoey' UNION ALL
+		select 'Leah' UNION ALL
+		select 'Hazel' UNION ALL
+		select 'Violet' UNION ALL
+		select 'Aurora' UNION ALL
+		select 'Savannah' UNION ALL
+		select 'Audrey' UNION ALL
+		select 'Brooklyn' UNION ALL
+		select 'Bella' UNION ALL
+		select 'Claire' UNION ALL
+		select 'Skylar' UNION ALL
+		select 'Lucy' UNION ALL
+		select 'Paisley' UNION ALL
+		select 'Everly' UNION ALL
+		select 'Anna' UNION ALL
+		select 'Caroline' UNION ALL
+		select 'Nova' UNION ALL
+		select 'Genesis' UNION ALL
+		select 'Emilia' UNION ALL
+		select 'Kennedy' UNION ALL
+		select 'Samantha' UNION ALL
+		select 'Maya' UNION ALL
+		select 'Willow' UNION ALL
+		select 'Kinsley' UNION ALL
+		select 'Naomi' UNION ALL
+		select 'Aaliyah' UNION ALL
+		select 'Elena' UNION ALL
+		select 'Sarah' UNION ALL
+		select 'Ariana' UNION ALL
+		select 'Allison' UNION ALL
+		select 'Gabriella' UNION ALL
+		select 'Alice' UNION ALL
+		select 'Madelyn' UNION ALL
+		select 'Cora' UNION ALL
+		select 'Ruby' UNION ALL
+		select 'Eva' UNION ALL
+		select 'Serenity' UNION ALL
+		select 'Autumn' UNION ALL
+		select 'Adeline' UNION ALL
+		select 'Hailey' UNION ALL
+		select 'Gianna' UNION ALL
+		select 'Valentina' UNION ALL
+		select 'Isla' UNION ALL
+		select 'Eliana' UNION ALL
+		select 'Quinn' UNION ALL
+		select 'Nevaeh' UNION ALL
         SELECT 'Maurice'
         -- Add more first names here if needed
     ) AS first_names
@@ -153,6 +227,91 @@ FROM (
         SELECT 'Müller' UNION all
         SELECT 'Schneider' UNION all
         SELECT 'Weiland' UNION all
+		SELECT 'Smith' UNION ALL
+		SELECT 'Johnson' UNION ALL
+		SELECT 'Williams' UNION ALL
+		SELECT 'Jones' UNION ALL
+		SELECT 'Brown' UNION ALL
+		SELECT 'Davis' UNION ALL
+		SELECT 'Miller' UNION ALL
+		SELECT 'Wilson' UNION ALL
+		SELECT 'Moore' UNION ALL
+		SELECT 'Taylor' UNION ALL
+		SELECT 'Anderson' UNION ALL
+		SELECT 'Thomas' UNION ALL
+		SELECT 'Jackson' UNION ALL
+		SELECT 'White' UNION ALL
+		SELECT 'Harris' UNION ALL
+		SELECT 'Martin' UNION ALL
+		SELECT 'Thompson' UNION ALL
+		SELECT 'Garcia' UNION ALL
+		SELECT 'Martinez' UNION ALL
+		SELECT 'Robinson' UNION ALL
+		SELECT 'Clark' UNION ALL
+		SELECT 'Rodriguez' UNION ALL
+		SELECT 'Lewis' UNION ALL
+		SELECT 'Lee' UNION ALL
+		SELECT 'Walker' UNION ALL
+		SELECT 'Hall' UNION ALL
+		SELECT 'Allen' UNION ALL
+		SELECT 'Young' UNION ALL
+		SELECT 'Hernandez' UNION ALL
+		SELECT 'King' UNION ALL
+		SELECT 'Wright' UNION ALL
+		SELECT 'Lopez' UNION ALL
+		SELECT 'Hill' UNION ALL
+		SELECT 'Scott' UNION ALL
+		SELECT 'Green' UNION ALL
+		SELECT 'Adams' UNION ALL
+		SELECT 'Baker' UNION ALL
+		SELECT 'Gonzalez' UNION ALL
+		SELECT 'Nelson' UNION ALL
+		SELECT 'Carter' UNION ALL
+		SELECT 'Mitchell' UNION ALL
+		SELECT 'Perez' UNION ALL
+		SELECT 'Roberts' UNION ALL
+		SELECT 'Turner' UNION ALL
+		SELECT 'Phillips' UNION ALL
+		SELECT 'Campbell' UNION ALL
+		SELECT 'Parker' UNION ALL
+		SELECT 'Evans' UNION ALL
+		SELECT 'Edwards' UNION ALL
+		SELECT 'Collins' UNION ALL
+		SELECT 'Stewart' UNION ALL
+		SELECT 'Sanchez' UNION ALL
+		SELECT 'Morris' UNION ALL
+		SELECT 'Rogers' UNION ALL
+		SELECT 'Reed' UNION ALL
+		SELECT 'Cook' UNION ALL
+		SELECT 'Morgan' UNION ALL
+		SELECT 'Bell' UNION ALL
+		SELECT 'Murphy' UNION ALL
+		SELECT 'Bailey' UNION ALL
+		SELECT 'Rivera' UNION ALL
+		SELECT 'Cooper' UNION ALL
+		SELECT 'Richardson' UNION ALL
+		SELECT 'Cox' UNION ALL
+		SELECT 'Howard' UNION ALL
+		SELECT 'Ward' UNION ALL
+		SELECT 'Torres' UNION ALL
+		SELECT 'Peterson' UNION ALL
+		SELECT 'Gray' UNION ALL
+		SELECT 'Ramirez' UNION ALL
+		SELECT 'James' UNION ALL
+		SELECT 'Watson' UNION ALL
+		SELECT 'Brooks' UNION ALL
+		SELECT 'Kelly' UNION ALL
+		SELECT 'Sanders' UNION ALL
+		SELECT 'Price' UNION ALL
+		SELECT 'Bennett' UNION ALL
+		SELECT 'Wood' UNION ALL
+		SELECT 'Barnes' UNION ALL
+		SELECT 'Powell' UNION ALL
+		SELECT 'Ross' UNION ALL
+		SELECT 'Henderson' UNION ALL
+		SELECT 'Coleman' UNION ALL
+		SELECT 'Jenkins' UNION ALL
+		SELECT 'Perry' UNION ALL
         SELECT 'Martinez'
         -- Add more last names here if needed
     ) AS last_names
@@ -176,23 +335,35 @@ VALUES
   (8, 'Dortmund', 1500, 8),
   (9, 'Essen', 1750, 14),
   (10, 'Bremen', 1550, 16);
+ 
+INSERT INTO sales (date, customer_id, store_id, product_id, quantity, total_price)
+SELECT
+    current_date - (random() * 365)::INTEGER AS date,
+    (random() * 14 + 1):: INTEGER as customer_id,
+    (random() * 9 + 1)::INTEGER AS store_id,
+    (random() * 59 + 1)::INTEGER AS product_id,
+    (random() * 9 + 1)::INTEGER AS quantity,
+    (random() * 1000)::NUMERIC(10, 2) AS total_price
+from generate_series(1, 1000);
 
-SELECT * FROM sales;
 SELECT * FROM product;
 SELECT * FROM customer;
 select * from stores;
+SELECT * FROM sales;
 
 /*POINT TWO: Write SQL Queries to answer the tasks below. 
  * Sales Performance Analysis:*/
 /*1. Write SQL queries to calculate the total sales for each store last month.*/
+
 SELECT s.store_id, st.location_store, SUM(s.total_price) AS total_sales
 FROM sales s
 JOIN stores st ON s.store_id = st.store_id
-WHERE EXTRACT(MONTH FROM s.date) = 12
+where EXTRACT(MONTH FROM s.date) = 12 and EXTRACT(YEAR FROM s.date) = 2023
 GROUP BY s.store_id, st.location_store
 ORDER BY total_sales DESC;
 
 /*2. Identify the top 5 performing products in terms of quantity sold.*/
+
 SELECT p.product_name, p.category, s.product_id, SUM(s.quantity) AS total_quantity
 FROM sales s
 JOIN product p ON s.product_id = p.product_id 
@@ -201,11 +372,12 @@ ORDER BY total_quantity DESC
 LIMIT 5;
 
 /*3. Analyze the sales trend for a particular product category over the past year.*/
-select p.category, sum(quantity)  as total_quantity
-from sales s 
-join product p on p.product_id = s.product_id
-group by category 
-order by total_quantity desc;
+
+SELECT p.category, DATE_TRUNC('month', s.date) AS month, SUM(s.total_price) AS total_sales
+FROM sales s
+JOIN product p ON p.product_id = s.product_id
+GROUP BY p.category, DATE_TRUNC('month', s.date)
+order by category;
 
 /* Customer Insights:
 4. Determine the average purchase value per customer.*/
@@ -217,6 +389,7 @@ group by s.customer_id, c.customer_name
 order by average_purchase desc;
 
 /*5. Identify the top 10 customers based on their total spending.*/
+
 select s.customer_id, c.customer_name, sum(total_price) as total_spending
 from sales s 
 join customer c  on c.customer_id = s.customer_id
@@ -226,6 +399,7 @@ limit 10;
 
 /*6. Find patterns (look at avg. spendings) in purchase behavior based on membership
 status.*/
+
 select s.customer_id, c.customer_name, c.membership, avg(s.total_price) as average_spending 
 from sales s 
 join customer c  on c.customer_id = s.customer_id
@@ -235,6 +409,7 @@ order by average_spending desc;
 /* Advanced Analysis:
 7. Use window functions to rank stores based on their growth in sales quarter over
 quarter.*/
+
 SELECT store_id, location_store, quarter, avg_sales_growth, store_rank
 FROM (
   SELECT store_id, location_store, quarter, avg_sales_growth,
@@ -249,27 +424,22 @@ FROM (
   ) AS subquery
 ) AS ranked_stores;
 
-
-WITH ranked_stores AS (
-  SELECT s.store_id, st.location_store, quarter, sum_sales, store_rank
+/*create table tableau as
+SELECT store_id, location_store, quarter, sum_sales_growth, store_rank
+FROM (
+  SELECT store_id, location_store, quarter, sum_sales_growth,
+         RANK() OVER (PARTITION BY quarter ORDER BY sum_sales_growth DESC) AS store_rank
   FROM (
-    SELECT s.store_id, st.location_store, quarter, sum_sales,
-           RANK() OVER (PARTITION BY quarter ORDER BY sum_sales DESC) AS store_rank
-    FROM (
-      SELECT s.store_id, st.location_store, 
-             DATE_TRUNC('quarter', s.date) AS quarter,
-             SUM(s.total_price) AS sum_sales
-      FROM sales s
-      JOIN stores st ON s.store_id = st.store_id
-      GROUP BY s.store_id, st.location_store, DATE_TRUNC('quarter', s.date)
-    ) AS subquery
-  ) AS ranked_stores
-)
-SELECT *
-FROM ranked_stores
-WHERE store_rank > 10;
-
-
+    SELECT s.store_id, st.location_store, 
+           DATE_TRUNC('quarter', s.date) AS quarter,
+           SUM(s.total_price) - LAG(SUM(s.total_price)) OVER (PARTITION BY s.store_id ORDER BY DATE_TRUNC('quarter', s.date)) AS sum_sales_growth
+    FROM sales s
+    JOIN stores st ON s.store_id = st.store_id
+    GROUP BY s.store_id, st.location_store, DATE_TRUNC('quarter', s.date)
+  ) AS subquery
+) AS ranked_stores;
+;
+select * from tableau ;*/
 
 
 
