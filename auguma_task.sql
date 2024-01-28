@@ -381,8 +381,16 @@ order by category;
 
 /* Customer Insights:
 4. Determine the average purchase value per customer.*/
-select s.customer_id, c.customer_name, sum(total_price) as total_purchase, 
-avg(s.total_price) as average_purchase 
+
+select 
+	count(s.transaction_id) as total_number_of_purchases, 
+	sum(total_price) as total_sales_revenue,
+	sum(total_price)/count(s.transaction_id) as average_purchase_value_per_customer
+from sales s;
+
+select s.customer_id, c.customer_name, 
+	sum(total_price) as total_purchase, 
+	avg(s.total_price) as average_purchase
 from sales s 
 join customer c  on c.customer_id = s.customer_id
 group by s.customer_id, c.customer_name
@@ -399,6 +407,12 @@ limit 10;
 
 /*6. Find patterns (look at avg. spendings) in purchase behavior based on membership
 status.*/
+
+select s.customer_id, c.membership, avg(s.total_price) as average_spending 
+from sales s
+join customer c  on c.customer_id = s.customer_id
+group by s.customer_id, c.membership 
+order by average_spending desc;
 
 select s.customer_id, c.customer_name, c.membership, avg(s.total_price) as average_spending 
 from sales s 
