@@ -15,5 +15,6 @@ SELECT
 FROM sales AS st
 JOIN customer AS s ON st.customer_id = s.customer_id;
 
-SELECT * FROM sales_customer;
+select count(distinct customer_name) 
+FROM sales_customer;
 

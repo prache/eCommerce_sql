@@ -408,16 +408,10 @@ limit 10;
 /*6. Find patterns (look at avg. spendings) in purchase behavior based on membership
 status.*/
 
-select s.customer_id, c.membership, avg(s.total_price) as average_spending 
+select c.membership, avg(s.total_price) as average_spending 
 from sales s
 join customer c  on c.customer_id = s.customer_id
-group by s.customer_id, c.membership 
-order by average_spending desc;
-
-select s.customer_id, c.customer_name, c.membership, avg(s.total_price) as average_spending 
-from sales s 
-join customer c  on c.customer_id = s.customer_id
-group by s.customer_id, c.customer_name, membership 
+group by c.membership 
 order by average_spending desc;
 
 /* Advanced Analysis:
@@ -454,6 +448,8 @@ FROM (
 ) AS ranked_stores;
 ;
 select * from tableau ;*/
+
+
 
 
 
