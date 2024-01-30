@@ -1,0 +1,61 @@
+"product_id","category","product_name","supplier","price"
+1,Furnitures,Supreme Comfort Sofa,Supplier 15,799.00
+2,Furnitures,Delightful Dining Table,Supplier 8,499.00
+3,Furnitures,Elegant Coffee Table Set,Supplier 7,249.00
+4,Furnitures,Royale Recliner Chair,Supplier 3,699.00
+5,Kitchen Appliances,Pro Smart Blender,Supplier 5,89.00
+6,Kitchen Appliances,Stainless Steel Toaster Oven,Supplier 4,79.00
+7,Kitchen Appliances,Master Multi-Cooker,Supplier 6,129.00
+8,Kitchen Appliances,Dream Espresso Machine,Supplier 19,299.00
+9,Decoration Articles,Artisanal Wall Mirror,Supplier 1,149.00
+10,Decoration Articles,Floral Canvas Artwork,Supplier 17,79.00
+11,Decoration Articles,Vintage Table Clock,Supplier 17,39.00
+12,Decoration Articles,Decorative Throw Blanket,Supplier 1,49.00
+13,Electronic Appliances,Ultra HD Smart TV,Supplier 8,999.00
+14,Electronic Appliances,Wireless Soundbar Speaker,Supplier 3,149.00
+15,Electronic Appliances,Robotic Vacuum Cleaner,Supplier 20,299.00
+16,Electronic Appliances,Smart Home Security Kit,Supplier 4,199.00
+17,Curtains,Sheer Elegance Window Curtains,Supplier 2,59.00
+18,Curtains,Blackout Drapery Panels,Supplier 5,69.00
+19,Curtains,Printed Window Valances,Supplier 7,29.00
+20,Curtains,Velvet Room Divider Screen,Supplier 15,199.00
+21,Beds and Mattresses,OrthoComfort Memory Foam Mattress,Supplier 15,499.00
+22,Beds and Mattresses,Adjustable Bed Base Frame,Supplier 8,399.00
+23,Beds and Mattresses,Plush Pillow Top Mattress,Supplier 7,599.00
+24,Beds and Mattresses,Hybrid Sleep System Mattress,Supplier 3,799.00
+25,Sports,Cardio Fitness Treadmill Machine,Supplier 5,999.00
+26,Sports,Durable Soccer Goal Net,Supplier 4,79.00
+27,Sports,Yoga Mat and Block Set,Supplier 6,39.00
+28,Sports,Outdoor Badminton Set,Supplier 19,49.00
+29,Sanitary Articles,Rainfall Shower Head,Supplier 1,39.00
+30,Sanitary Articles,Modern Bathroom Faucet,Supplier 17,99.00
+31,Sanitary Articles,Bidet Toilet Seat,Supplier 17,149.00
+32,Sanitary Articles,Glass Shelf with Towel Bar,Supplier 1,59.00
+33,Kids Furniture,Princess Castle Bed,Supplier 8,399.00
+34,Kids Furniture,Colorful Play Table and Chairs,Supplier 3,149.00
+35,Kids Furniture,Toy Storage Organizer,Supplier 20,79.00
+36,Kids Furniture,Kids Bean Bag Chair,Supplier 4,99.00
+37,Furnitures,Classic Leather Armchair,Supplier 2,599.00
+38,Furnitures,Contemporary Dining Set,Supplier 5,799.00
+39,Furnitures,Rustic Coffee Table,Supplier 7,299.00
+40,Furnitures,Modern TV Stand,Supplier 15,199.00
+41,Kitchen Appliances,High-Speed Blender,Supplier 15,129.00
+42,Kitchen Appliances,Compact Microwave Oven,Supplier 8,89.00
+43,Kitchen Appliances,Electric Pressure Cooker,Supplier 7,109.00
+44,Kitchen Appliances,Automatic Coffee Maker,Supplier 3,89.00
+45,Decoration Articles,Abstract Wall Art,Supplier 5,79.00
+46,Decoration Articles,Framed Landscape Painting,Supplier 4,149.00
+47,Decoration Articles,Decorative Floor Vase,Supplier 6,69.00
+48,Decoration Articles,Scented Candles Set,Supplier 19,29.00
+49,Electronic Appliances,"65-Inch 4K Smart TV",Supplier 1,1499.00
+50,Electronic Appliances,Wireless Bluetooth Speaker,Supplier 17,79.00
+51,Electronic Appliances,Robotic Lawn Mower,Supplier 17,599.00
+52,Electronic Appliances,Smart Thermostat System,Supplier 1,199.00
+53,Curtains,Energy-Efficient Curtains,Supplier 8,49.00
+54,Curtains,Sheer Voile Window Treatments,Supplier 3,39.00
+55,Curtains,Roman Shades Blinds,Supplier 20,59.00
+56,Curtains,Plush Pillow Top Mattress,Supplier 4,599.00
+57,Beds and Mattresses,Adjustable Bed Frame,Supplier 2,299.00
+58,Beds and Mattresses,Memory Foam Mattress Topper,Supplier 5,129.00
+59,Beds and Mattresses,High-End Home Gym Equipment,Supplier 7,1999.00
+60,Beds and Mattresses,Professional Tennis Racket,Supplier 15,149.00
