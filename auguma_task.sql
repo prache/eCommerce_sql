@@ -10,7 +10,7 @@ CREATE TABLE product (
 );
 
 CREATE TABLE customer (
-    customer_id SERIAL primary key not null, --INT PRIMARY KEY DEFAULT nextval('customer_id_seq'),
+    customer_id integer primary key not null, --INT PRIMARY KEY DEFAULT nextval('customer_id_seq'),
     customer_name VARCHAR(255),
     contact VARCHAR(255),
     membership VARCHAR(255)
@@ -100,228 +100,108 @@ INSERT INTO product (product_id, category, product_name, supplier, price) values
 ('59', 'Beds and Mattresses', 'High-End Home Gym Equipment', 'Supplier 7', 1999),
 ('60', 'Beds and Mattresses', 'Professional Tennis Racket', 'Supplier 15', 149);
 
-INSERT INTO customer (customer_name, contact, membership)
-SELECT
-    CONCAT(names.first_name, ' ', names.last_name) AS customer_name,
-    CONCAT(names.first_name, '.', names.last_name, '@gmx.de') AS contact,
-    memberships.membership
-FROM (
-    SELECT DISTINCT ON (first_name, last_name)
-        first_name,
-        last_name
-    FROM (
-        SELECT 'John' AS first_name UNION ALL
-        SELECT 'Jane' UNION ALL
-        SELECT 'Michael' UNION ALL
-        SELECT 'Emily' UNION ALL
-        SELECT 'David' UNION ALL
-        SELECT 'Sophia' UNION ALL
-        SELECT 'William' UNION ALL
-        SELECT 'Olivia' UNION ALL
-        SELECT 'James' UNION all
-        select 'Maren' UNION all
-        select 'Louisa' UNION all
-        select 'Karin' UNION all
-        select 'Cindy' UNION all
-        select 'Christian' UNION all
-        select 'Christian' UNION ALL
-		select 'Olivia' UNION ALL
-		select 'Liam' UNION ALL
-		select 'Emma' UNION ALL
-		select 'Noah' UNION ALL
-		select 'Ava' UNION ALL
-		select 'Sophia' UNION ALL
-		select 'Isabella' UNION ALL
-		select 'Mia' UNION ALL
-		select 'Charlotte' UNION ALL
-		select 'Amelia' UNION ALL
-		select 'Harper' UNION ALL
-		select 'Evelyn' UNION ALL
-		select 'Abigail' UNION ALL
-		select 'Emily' UNION ALL
-		select 'Elizabeth' UNION ALL
-		select 'Mila' UNION ALL
-		select 'Ella' UNION ALL
-		select 'Scarlett' UNION ALL
-		select 'Luna' UNION ALL
-		select 'Sofia' UNION ALL
-		select 'Avery' UNION ALL
-		select 'Grace' UNION ALL
-		select 'Chloe' UNION ALL
-		select 'Victoria' UNION ALL
-		select 'Madison' UNION ALL
-		select 'Eleanor' UNION ALL
-		select 'Hannah' UNION ALL
-		select 'Nora' UNION ALL
-		select 'Riley' UNION ALL
-		select 'Zoe' UNION ALL
-		select 'Lily' UNION ALL
-		select 'Layla' UNION ALL
-		select 'Lillian' UNION ALL
-		select 'Addison' UNION ALL
-		select 'Aubrey' UNION ALL
-		select 'Ellie' UNION ALL
-		select 'Stella' UNION ALL
-		select 'Natalie' UNION ALL
-		select 'Zoey' UNION ALL
-		select 'Leah' UNION ALL
-		select 'Hazel' UNION ALL
-		select 'Violet' UNION ALL
-		select 'Aurora' UNION ALL
-		select 'Savannah' UNION ALL
-		select 'Audrey' UNION ALL
-		select 'Brooklyn' UNION ALL
-		select 'Bella' UNION ALL
-		select 'Claire' UNION ALL
-		select 'Skylar' UNION ALL
-		select 'Lucy' UNION ALL
-		select 'Paisley' UNION ALL
-		select 'Everly' UNION ALL
-		select 'Anna' UNION ALL
-		select 'Caroline' UNION ALL
-		select 'Nova' UNION ALL
-		select 'Genesis' UNION ALL
-		select 'Emilia' UNION ALL
-		select 'Kennedy' UNION ALL
-		select 'Samantha' UNION ALL
-		select 'Maya' UNION ALL
-		select 'Willow' UNION ALL
-		select 'Kinsley' UNION ALL
-		select 'Naomi' UNION ALL
-		select 'Aaliyah' UNION ALL
-		select 'Elena' UNION ALL
-		select 'Sarah' UNION ALL
-		select 'Ariana' UNION ALL
-		select 'Allison' UNION ALL
-		select 'Gabriella' UNION ALL
-		select 'Alice' UNION ALL
-		select 'Madelyn' UNION ALL
-		select 'Cora' UNION ALL
-		select 'Ruby' UNION ALL
-		select 'Eva' UNION ALL
-		select 'Serenity' UNION ALL
-		select 'Autumn' UNION ALL
-		select 'Adeline' UNION ALL
-		select 'Hailey' UNION ALL
-		select 'Gianna' UNION ALL
-		select 'Valentina' UNION ALL
-		select 'Isla' UNION ALL
-		select 'Eliana' UNION ALL
-		select 'Quinn' UNION ALL
-		select 'Nevaeh' UNION ALL
-        SELECT 'Maurice'
-        -- Add more first names here if needed
-    ) AS first_names
-    CROSS JOIN (
-        SELECT 'Smith' AS last_name UNION ALL
-        SELECT 'Johnson' UNION ALL
-        SELECT 'Williams' UNION ALL
-        SELECT 'Brown' UNION ALL
-        SELECT 'Jones' UNION ALL
-        SELECT 'Miller' UNION ALL
-        SELECT 'Davis' UNION ALL
-        SELECT 'Garcia' UNION ALL
-        SELECT 'Höffner' UNION all
-        SELECT 'Bankmann' UNION all
-        SELECT 'Schmitz' UNION all
-        SELECT 'Müller' UNION all
-        SELECT 'Schneider' UNION all
-        SELECT 'Weiland' UNION all
-		SELECT 'Smith' UNION ALL
-		SELECT 'Johnson' UNION ALL
-		SELECT 'Williams' UNION ALL
-		SELECT 'Jones' UNION ALL
-		SELECT 'Brown' UNION ALL
-		SELECT 'Davis' UNION ALL
-		SELECT 'Miller' UNION ALL
-		SELECT 'Wilson' UNION ALL
-		SELECT 'Moore' UNION ALL
-		SELECT 'Taylor' UNION ALL
-		SELECT 'Anderson' UNION ALL
-		SELECT 'Thomas' UNION ALL
-		SELECT 'Jackson' UNION ALL
-		SELECT 'White' UNION ALL
-		SELECT 'Harris' UNION ALL
-		SELECT 'Martin' UNION ALL
-		SELECT 'Thompson' UNION ALL
-		SELECT 'Garcia' UNION ALL
-		SELECT 'Martinez' UNION ALL
-		SELECT 'Robinson' UNION ALL
-		SELECT 'Clark' UNION ALL
-		SELECT 'Rodriguez' UNION ALL
-		SELECT 'Lewis' UNION ALL
-		SELECT 'Lee' UNION ALL
-		SELECT 'Walker' UNION ALL
-		SELECT 'Hall' UNION ALL
-		SELECT 'Allen' UNION ALL
-		SELECT 'Young' UNION ALL
-		SELECT 'Hernandez' UNION ALL
-		SELECT 'King' UNION ALL
-		SELECT 'Wright' UNION ALL
-		SELECT 'Lopez' UNION ALL
-		SELECT 'Hill' UNION ALL
-		SELECT 'Scott' UNION ALL
-		SELECT 'Green' UNION ALL
-		SELECT 'Adams' UNION ALL
-		SELECT 'Baker' UNION ALL
-		SELECT 'Gonzalez' UNION ALL
-		SELECT 'Nelson' UNION ALL
-		SELECT 'Carter' UNION ALL
-		SELECT 'Mitchell' UNION ALL
-		SELECT 'Perez' UNION ALL
-		SELECT 'Roberts' UNION ALL
-		SELECT 'Turner' UNION ALL
-		SELECT 'Phillips' UNION ALL
-		SELECT 'Campbell' UNION ALL
-		SELECT 'Parker' UNION ALL
-		SELECT 'Evans' UNION ALL
-		SELECT 'Edwards' UNION ALL
-		SELECT 'Collins' UNION ALL
-		SELECT 'Stewart' UNION ALL
-		SELECT 'Sanchez' UNION ALL
-		SELECT 'Morris' UNION ALL
-		SELECT 'Rogers' UNION ALL
-		SELECT 'Reed' UNION ALL
-		SELECT 'Cook' UNION ALL
-		SELECT 'Morgan' UNION ALL
-		SELECT 'Bell' UNION ALL
-		SELECT 'Murphy' UNION ALL
-		SELECT 'Bailey' UNION ALL
-		SELECT 'Rivera' UNION ALL
-		SELECT 'Cooper' UNION ALL
-		SELECT 'Richardson' UNION ALL
-		SELECT 'Cox' UNION ALL
-		SELECT 'Howard' UNION ALL
-		SELECT 'Ward' UNION ALL
-		SELECT 'Torres' UNION ALL
-		SELECT 'Peterson' UNION ALL
-		SELECT 'Gray' UNION ALL
-		SELECT 'Ramirez' UNION ALL
-		SELECT 'James' UNION ALL
-		SELECT 'Watson' UNION ALL
-		SELECT 'Brooks' UNION ALL
-		SELECT 'Kelly' UNION ALL
-		SELECT 'Sanders' UNION ALL
-		SELECT 'Price' UNION ALL
-		SELECT 'Bennett' UNION ALL
-		SELECT 'Wood' UNION ALL
-		SELECT 'Barnes' UNION ALL
-		SELECT 'Powell' UNION ALL
-		SELECT 'Ross' UNION ALL
-		SELECT 'Henderson' UNION ALL
-		SELECT 'Coleman' UNION ALL
-		SELECT 'Jenkins' UNION ALL
-		SELECT 'Perry' UNION ALL
-        SELECT 'Martinez'
-        -- Add more last names here if needed
-    ) AS last_names
-) AS names
-CROSS JOIN (
-    SELECT 'Standard' AS membership UNION ALL
-    SELECT 'Premium'
-) AS memberships
-ORDER BY RANDOM()
-LIMIT 100;
+
+INSERT INTO customer (customer_id, customer_name, contact, membership)
+VALUES ('1', 'John Karlo', 'john.karlo@gmx.de', 'Standard'),
+('2', 'Jane Johnson', 'jane.johnson@gmx.de', 'Premium'),
+('3', 'Michael Williams', 'michael.williams@gmx.de', 'Standard'),
+('4', 'Emily Brown', 'emily.brown@gmx.de', 'Premium'),
+('5', 'David Jones', 'david.jones@gmx.de', 'Standard'),
+('6', 'Sophia Miller', 'sophia.miller@gmx.de', 'Premium'),
+('7', 'William Davis', 'william.davis@gmx.de', 'Standard'),
+('8', 'Olivia Garcia', 'olivia.garcia@gmx.de', 'Premium'),
+('9', 'James Höffner', 'james.hoffner@gmx.de', 'Standard'),
+('10', 'Maren Bankmann', 'maren.bankmann@gmx.de', 'Premium'),
+('11', 'Louisa Schmitz', 'louisa.schmitz@gmx.de', 'Standard'),
+('12', 'Karin Müller', 'karin.muller@gmx.de', 'Premium'),
+('13', 'Cindy Schneider', 'cindy.schneider@gmx.de', 'Standard'),
+('14', 'Christian Weiland', 'christian.weiland@gmx.de', 'Premium'),
+('15', 'Christian Smith', 'christian.smith@gmx.de', 'Standard'),
+('16', 'Olivia Johnson', 'olivia.johnson@gmx.de', 'Premium'),
+('17', 'Liam Williams', 'liam.williams@gmx.de', 'Standard'),
+('18', 'Emma Jones', 'emma.jones@gmx.de', 'Premium'),
+('19', 'Noah Brown', 'noah.brown@gmx.de', 'Standard'),
+('20', 'Ava Davis', 'ava.davis@gmx.de', 'Premium'),
+('21', 'Sophia Miller', 'sophia.miller@gmx.de', 'Standard'),
+('22', 'Isabella Wilson', 'isabella.wilson@gmx.de', 'Premium'),
+('23', 'Mia Moore', 'mia.moore@gmx.de', 'Standard'),
+('24', 'Charlotte Taylor', 'charlotte.taylor@gmx.de', 'Premium'),
+('25', 'Amelia Anderson', 'amelia.anderson@gmx.de', 'Standard'),
+('26', 'Harper Thomas', 'harper.thomas@gmx.de', 'Premium'),
+('27', 'Evelyn Jackson', 'evelyn.jackson@gmx.de', 'Standard'),
+('28', 'Abigail White', 'abigail.white@gmx.de', 'Premium'),
+('29', 'Emily Harris', 'emily.harris@gmx.de', 'Standard'),
+('30', 'Elizabeth Martin', 'elizabeth.martin@gmx.de', 'Premium'),
+('31', 'Mila Thompson', 'mila.thompson@gmx.de', 'Standard'),
+('32', 'Ella Garcia', 'ella.garcia@gmx.de', 'Premium'),
+('33', 'Scarlett Martinez', 'scarlett.martinez@gmx.de', 'Standard'),
+('34', 'Luna Robinson', 'luna.robinson@gmx.de', 'Premium'),
+('35', 'Sofia Clark', 'sofia.clark@gmx.de', 'Standard'),
+('36', 'Avery Rodriguez', 'avery.rodriguez@gmx.de', 'Premium'),
+('37', 'Grace Lewis', 'grace.lewis@gmx.de', 'Standard'),
+('38', 'Chloe Lee', 'chloe.lee@gmx.de', 'Premium'),
+('39', 'Victoria Walker', 'victoria.walker@gmx.de', 'Standard'),
+('40', 'Madison Hall', 'madison.hall@gmx.de', 'Premium'),
+('41', 'Eleanor Allen', 'eleanor.allen@gmx.de', 'Standard'),
+('42', 'Hannah Young', 'hannah.young@gmx.de', 'Premium'),
+('43', 'Nora Hernandez', 'nora.hernandez@gmx.de', 'Standard'),
+('44', 'Riley King', 'riley.king@gmx.de', 'Premium'),
+('45', 'Zoe Wright', 'zoe.wright@gmx.de', 'Standard'),
+('46', 'Lily Lopez', 'lily.lopez@gmx.de', 'Premium'),
+('47', 'Layla Hill', 'layla.hill@gmx.de', 'Standard'),
+('48', 'Lillian Scott', 'lillian.scott@gmx.de', 'Standard'),
+('49', 'Ethan Adams', 'ethan.adams@gmx.de', 'Premium'),
+('50', 'Avery Rivera', 'avery.rivera@gmx.de', 'Standard'),
+('51', 'Benjamin Torres', 'benjamin.torres@gmx.de', 'Premium'),
+('52', 'Elijah Mitchell', 'elijah.mitchell@gmx.de', 'Standard'),
+('53', 'Logan Perez', 'logan.perez@gmx.de', 'Premium'),
+('54', 'Lucas Roberts', 'lucas.roberts@gmx.de', 'Standard'),
+('55', 'Mason Turner', 'mason.turner@gmx.de', 'Premium'),
+('56', 'Alexander Phillips', 'alexander.phillips@gmx.de', 'Standard'),
+('57', 'Henry Campbell', 'henry.campbell@gmx.de', 'Premium'),
+('58', 'Sebastian Edwards', 'sebastian.edwards@gmx.de', 'Standard'),
+('59', 'Jack Foster', 'jack.foster@gmx.de', 'Premium'),
+('60', 'Owen Collins', 'owen.collins@gmx.de', 'Standard'),
+('61', 'Samuel Stewart', 'samuel.stewart@gmx.de', 'Premium'),
+('62', 'Matthew Sanchez', 'matthew.sanchez@gmx.de', 'Standard'),
+('63', 'Joseph Morris', 'joseph.morris@gmx.de', 'Premium'),
+('64', 'Levi Rogers', 'levi.rogers@gmx.de', 'Standard'),
+('65', 'Wyatt Reed', 'wyatt.reed@gmx.de', 'Premium'),
+('66', 'Christian Cook', 'christian.cook@gmx.de', 'Standard'),
+('67', 'Andrew Morgan', 'andrew.morgan@gmx.de', 'Premium'),
+('68', 'Gabriel Bell', 'gabriel.bell@gmx.de', 'Standard'),
+('69', 'Daniel Coleman', 'daniel.coleman@gmx.de', 'Premium'),
+('70', 'Isaac Richardson', 'isaac.richardson@gmx.de', 'Standard'),
+('71', 'Alexander Peterson', 'alexander.peterson@gmx.de', 'Premium'),
+('72', 'Carter Murphy', 'carter.murphy@gmx.de', 'Standard'),
+('73', 'Jayden Griffin', 'jayden.griffin@gmx.de', 'Premium'),
+('74', 'Nathan West', 'nathan.west@gmx.de', 'Standard'),
+('75', 'Dylan Cox', 'dylan.cox@gmx.de', 'Premium'),
+('76', 'Elijah Howard', 'elijah.howard@gmx.de', 'Standard'),
+('77', 'Nicholas Ward', 'nicholas.ward@gmx.de', 'Premium'),
+('78', 'Samuel Bailey', 'samuel.bailey@gmx.de', 'Standard'),
+('79', 'Christopher Foster', 'christopher.foster@gmx.de', 'Premium'),
+('80', 'Henry Simmons', 'henry.simmons@gmx.de', 'Standard'),
+('81', 'Benjamin Murphy', 'benjamin.murphy@gmx.de', 'Premium'),
+('82', 'Andrew Simmons', 'andrew.simmons@gmx.de', 'Standard'),
+('83', 'Joseph Powell', 'joseph.powell@gmx.de', 'Premium'),
+('84', 'David Foster', 'david.foster@gmx.de', 'Standard'),
+('85', 'Alexander Wright', 'alexander.wright@gmx.de', 'Premium'),
+('86', 'William Barnes', 'william.barnes@gmx.de', 'Standard'),
+('87', 'Benjamin Bennett', 'benjamin.bennett@gmx.de', 'Premium'),
+('88', 'Samuel Bauer', 'samuel.bauer@gmx.de', 'Premium'),
+('89', 'Joseph Sanchez', 'joseph.sanchez@gmx.de', 'Standard'),
+('90', 'Daniel Henderson', 'daniel.henderson@gmx.de', 'Standard'),
+('91', 'Henry Perry', 'henry.perry@gmx.de', 'Premium'),
+('92', 'Nathan Cox', 'nathan.cox@gmx.de', 'Standard'),
+('93', 'David Bailey', 'david.bailey@gmx.de', 'Premium'),
+('94', 'Andrew Schmidt', 'andrew.schmidt@gmx.de', 'Premium'),
+('95', 'Christopher Powell', 'christopher.powell@gmx.de', 'Premium'),
+('96', 'Henry Foster', 'henry.foster@gmx.de', 'Standard'),
+('97', 'Ethan Adams', 'ethan.adams@gmx.de', 'Premium'),
+('98', 'Mason Thompson', 'mason.thompson@gmx.de', 'Standard'),
+('99', 'Vivek Sharma', 'vivek.sharma@gmx.de', 'Premium'),
+('100', 'Gouri Laxman', 'gouri.laxman@gmx.de', 'Premium');
 
 INSERT INTO stores (store_id, location_store, size_store, employee_number)
 VALUES
@@ -430,24 +310,8 @@ FROM (
     JOIN stores st ON s.store_id = st.store_id
     GROUP BY s.store_id, st.location_store, DATE_TRUNC('quarter', s.date)
   ) AS subquery
-) AS ranked_stores;
+) AS ranked_stores where avg_sales_growth is not null;
 
-/*create table tableau as
-SELECT store_id, location_store, quarter, sum_sales_growth, store_rank
-FROM (
-  SELECT store_id, location_store, quarter, sum_sales_growth,
-         RANK() OVER (PARTITION BY quarter ORDER BY sum_sales_growth DESC) AS store_rank
-  FROM (
-    SELECT s.store_id, st.location_store, 
-           DATE_TRUNC('quarter', s.date) AS quarter,
-           SUM(s.total_price) - LAG(SUM(s.total_price)) OVER (PARTITION BY s.store_id ORDER BY DATE_TRUNC('quarter', s.date)) AS sum_sales_growth
-    FROM sales s
-    JOIN stores st ON s.store_id = st.store_id
-    GROUP BY s.store_id, st.location_store, DATE_TRUNC('quarter', s.date)
-  ) AS subquery
-) AS ranked_stores;
-;
-select * from tableau ;*/
 
 
 
