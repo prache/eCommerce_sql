@@ -1,4 +1,4 @@
-# auguma_project
+# eCommerce_sql
 Example Case for Business Analyst  Case Study: Retail Sales Analysis 
 
 Example Case for Business Analyst
